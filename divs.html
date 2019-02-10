@@ -1,0 +1,200 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Teo squares</title>
+
+    <style>
+        body {
+            margin: 0px;
+        }
+
+        .screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .brown {
+            background: #795548;
+        }
+
+        .purple {
+            background: purple;
+        }
+
+        .red {
+            background: red;
+        }
+
+        .green {
+            background: green;
+        }
+
+        .blue {
+            background: blue;
+        }
+
+        .yellow {
+            background: yellow;
+        }
+
+        .orange {
+            background: orange;
+        }
+
+        .black {
+            background: black;
+
+        }
+
+        .square.black {
+            border: 1px solid white;
+        }
+
+        .screen.black {
+            color: white;
+        }
+
+        .navbar {
+
+
+            position: fixed;
+            background: black;
+            bottom: 50%;
+            right: 0px;
+            padding: 10px;
+            border-radius: 40px;
+        }
+
+        .square {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            margin: 10px;
+        }
+
+
+        .square:hover {
+            opacity: 0.6;
+        }
+
+        .text {
+            text-align: center;
+            vertical-align: middle;
+            font-size: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="navbar">
+        <div class="square black"></div>
+        <div class="square brown"></div>
+        <div class="square purple"></div>
+        <div class="square red"></div>
+        <div class="square green"></div>
+        <div class="square blue"></div>
+        <div class="square yellow"></div>
+        <div class="square orange"></div>
+
+    </div>
+
+    <div class="screen black">
+
+        <span class="text animated shake infinite slow">
+            papa es el más pasadito de toda la tierra
+        </span>
+
+    </div>
+
+    <div class="screen brown">
+
+        <span class="text">
+
+            papa es el mas pesado de todo el universo
+        </span>
+
+    </div>
+
+    <div class="screen purple">
+
+        <span class="text">Isaac es el más pesadito de toda la Galaxia</span>
+
+    </div>
+
+    <div class="screen red">
+
+        <span class="text">Mama es la más guapa de toda la Galaxia</span>
+
+    </div>
+
+    <div class="screen green">
+
+        <span class="text">Teo vamos!</span>
+
+    </div>
+
+    <div class="screen blue">
+        <span class="text">GUAPITO</span>
+
+    </div>
+
+    <div class="screen yellow">
+
+        <span class="text">Pesadito</span>
+
+    </div>
+
+    <div class="screen orange">
+
+        <span class="text">Pizzaaaaaaaaa</span>
+
+    </div>
+
+
+    <script>
+        let squares = document.getElementsByClassName('square')
+        let screens = document.getElementsByClassName('screen')
+        let numSquares = squares.length
+
+        console.log(squares)
+
+
+        for (let i = 0; i < numSquares; i++) {
+
+            squares[i].addEventListener('click', function (event) {
+
+                let idx = Array.from(squares).indexOf(event.target)
+                console.log(event.target, idx)
+
+                let element = screens[idx]
+
+                console.log(element)
+
+                screens[idx].scrollTo(0, 0)
+                //  window.scrollTo(0, screens[idx].offsetTop)
+
+
+                window.scrollTo({
+                    top: screens[idx].offsetTop,
+                    left: 0,
+                    behavior: 'smooth'
+                })
+
+            });
+        }
+    </script>
+
+
+</body>
+
+
+</html>

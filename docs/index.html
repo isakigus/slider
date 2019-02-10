@@ -1,0 +1,707 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Teo squares</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+
+    <style>
+        body {
+            margin: 0px;
+        }
+
+        .screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .brown {
+            background: #795548;
+            background-image: url('https://www.redrocketmg.com/wp-content/uploads/Rocket-Logo-flipped-e1431974150176.png');
+            background-repeat: no-repeat;
+
+        }
+
+        .purple {
+            background: purple;
+            background-size: 100px 100px;
+            background-image: url('https://spaceplace.nasa.gov/review/stained-glass-earth/earth-1.en.png');
+            background-repeat: no-repeat;
+            background-position: top center;
+        }
+
+        .red {
+            background: red;
+            background-repeat: no-repeat;
+            background-image: url('https://wiki.openstreetmap.org/w/images/thumb/3/3a/Missing_maps_poster_6_Generic_A4_.png/531px-Missing_maps_poster_6_Generic_A4_.png')
+        }
+
+        .green {
+            background: green;
+            background-size: 300px 200px;
+            background-image: url('https://openclipart.org/image/2400px/svg_to_png/215677/diplodocus01.png');
+            background-repeat: no-repeat;
+        }
+
+        .blue {
+            background: blue;
+            background-size: 600px 400px;
+            background-image: url('http://dinosauriosx.com/wp-content/uploads/2016/10/apatosaurus.png');
+            background-repeat: no-repeat;
+            background-position: bottom center;
+
+        }
+
+        .yellow {
+            background: yellow;
+            background-size: 600px 400px;
+            background-image: url('http://www.dododex.com/media/creature/titanosaur.png');
+            background-repeat: no-repeat;
+            background-position: bottom center;
+
+
+        }
+
+        .orange {
+            background: orange;
+
+
+            background-image: url('https://vignette.wikia.nocookie.net/jurassicpark/images/5/51/Jurassic_world_brachiosaurus_updated_by_sonichedgehog2-dc55jvt.png/revision/latest?cb=20180421064726&path-prefix=es');
+            background-repeat: no-repeat;
+            background-position: bottom left;
+
+
+        }
+
+        .black {
+            background: black;
+            background-image: url('https://catrescues.org/wp-content/themes/wcdc/images/cat-footer.png');
+            background-repeat: no-repeat;
+
+        }
+
+        .square.black {
+            border: 1px solid white;
+        }
+
+        .screen.black {
+            color: white;
+        }
+
+        .navbar {
+
+            position: fixed;
+            background: black;
+            bottom: 50%;
+            right: 0px;
+            padding: 10px;
+            border-radius: 40px;
+        }
+
+        .square {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            margin: 10px;
+        }
+
+
+        .square:hover {
+            opacity: 0.6;
+        }
+
+        .text {
+            text-align: center;
+            vertical-align: middle;
+            font-size: 50px;
+            color: white;
+        }
+
+        div.yellow .text {
+            color: black;
+        }
+    </style>
+
+    <style>
+        .lds-grid {
+            display: inline-block;
+            position: relative;
+            width: 64px;
+            height: 64px;
+        }
+
+        .lds-grid div {
+            position: absolute;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #fdd;
+            animation: lds-grid 1.2s linear infinite;
+        }
+
+        .lds-grid div:nth-child(1) {
+            top: 6px;
+            left: 6px;
+            animation-delay: 0s;
+        }
+
+        .lds-grid div:nth-child(2) {
+            top: 6px;
+            left: 26px;
+            animation-delay: -0.4s;
+        }
+
+        .lds-grid div:nth-child(3) {
+            top: 6px;
+            left: 45px;
+            animation-delay: -0.8s;
+        }
+
+        .lds-grid div:nth-child(4) {
+            top: 26px;
+            left: 6px;
+            animation-delay: -0.4s;
+        }
+
+        .lds-grid div:nth-child(5) {
+            top: 26px;
+            left: 26px;
+            animation-delay: -0.8s;
+        }
+
+        .lds-grid div:nth-child(6) {
+            top: 26px;
+            left: 45px;
+            animation-delay: -1.2s;
+        }
+
+        .lds-grid div:nth-child(7) {
+            top: 45px;
+            left: 6px;
+            animation-delay: -0.8s;
+        }
+
+        .lds-grid div:nth-child(8) {
+            top: 45px;
+            left: 26px;
+            animation-delay: -1.2s;
+        }
+
+        .lds-grid div:nth-child(9) {
+            top: 45px;
+            left: 45px;
+            animation-delay: -1.6s;
+        }
+
+        @keyframes lds-grid {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .lds-circle {
+            display: inline-block;
+            transform: translateZ(1px);
+        }
+
+        .lds-circle>div {
+            display: inline-block;
+            width: 51px;
+            height: 51px;
+            margin: 6px;
+            border-radius: 50%;
+            background: #fdd;
+            animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+        }
+
+        @keyframes lds-circle {
+
+            0%,
+            100% {
+                animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+            }
+
+            0% {
+                transform: rotateY(0deg);
+            }
+
+            50% {
+                transform: rotateY(1800deg);
+                animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+            }
+
+            100% {
+                transform: rotateY(3600deg);
+            }
+        }
+
+
+        .lds-facebook {
+            display: inline-block;
+            position: relative;
+            width: 64px;
+            height: 64px;
+        }
+
+        .lds-facebook div {
+            display: inline-block;
+            position: absolute;
+            left: 6px;
+            width: 13px;
+            background: #fdd;
+            animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+        }
+
+        .lds-facebook div:nth-child(1) {
+            left: 6px;
+            animation-delay: -0.24s;
+        }
+
+        .lds-facebook div:nth-child(2) {
+            left: 26px;
+            animation-delay: -0.12s;
+        }
+
+        .lds-facebook div:nth-child(3) {
+            left: 45px;
+            animation-delay: 0;
+        }
+
+        @keyframes lds-facebook {
+            0% {
+                top: 6px;
+                height: 51px;
+            }
+
+            50%,
+            100% {
+                top: 19px;
+                height: 26px;
+            }
+        }
+
+        .lds-heart {
+            display: inline-block;
+            position: relative;
+            width: 64px;
+            height: 64px;
+            transform: rotate(45deg);
+            transform-origin: 32px 32px;
+        }
+
+        .lds-heart div {
+            top: 23px;
+            left: 19px;
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            background: #fdd;
+            animation: lds-heart 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        .lds-heart div:after,
+        .lds-heart div:before {
+            content: " ";
+            position: absolute;
+            display: block;
+            width: 26px;
+            height: 26px;
+            background: #fdd;
+        }
+
+        .lds-heart div:before {
+            left: -17px;
+            border-radius: 50% 0 0 50%;
+        }
+
+        .lds-heart div:after {
+            top: -17px;
+            border-radius: 50% 50% 0 0;
+        }
+
+        @keyframes lds-heart {
+            0% {
+                transform: scale(0.95);
+            }
+
+            5% {
+                transform: scale(1.1);
+            }
+
+            39% {
+                transform: scale(0.85);
+            }
+
+            45% {
+                transform: scale(1);
+            }
+
+            60% {
+                transform: scale(0.95);
+            }
+
+            100% {
+                transform: scale(0.9);
+            }
+        }
+
+        .lds-hourglass {
+            display: inline-block;
+            position: relative;
+            width: 64px;
+            height: 64px;
+        }
+
+        .lds-hourglass:after {
+            content: " ";
+            display: block;
+            border-radius: 50%;
+            width: 0;
+            height: 0;
+            margin: 6px;
+            box-sizing: border-box;
+            border: 26px solid #fdd;
+            border-color: #fdd transparent #fdd transparent;
+            animation: lds-hourglass 1.2s infinite;
+        }
+
+        @keyframes lds-hourglass {
+            0% {
+                transform: rotate(0);
+                animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+            }
+
+            50% {
+                transform: rotate(900deg);
+                animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            }
+
+            100% {
+                transform: rotate(1800deg);
+            }
+        }
+
+        .lds-ellipsis {
+            display: inline-block;
+            position: relative;
+            width: 64px;
+            height: 64px;
+        }
+
+        .lds-ellipsis div {
+            position: absolute;
+            top: 27px;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: #fdd;
+            animation-timing-function: cubic-bezier(0, 1, 1, 0);
+        }
+
+        .lds-ellipsis div:nth-child(1) {
+            left: 6px;
+            animation: lds-ellipsis1 0.6s infinite;
+        }
+
+        .lds-ellipsis div:nth-child(2) {
+            left: 6px;
+            animation: lds-ellipsis2 0.6s infinite;
+        }
+
+        .lds-ellipsis div:nth-child(3) {
+            left: 26px;
+            animation: lds-ellipsis2 0.6s infinite;
+        }
+
+        .lds-ellipsis div:nth-child(4) {
+            left: 45px;
+            animation: lds-ellipsis3 0.6s infinite;
+        }
+
+        @keyframes lds-ellipsis1 {
+            0% {
+                transform: scale(0);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes lds-ellipsis3 {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(0);
+            }
+        }
+
+        @keyframes lds-ellipsis2 {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(19px, 0);
+            }
+        }
+
+
+        .lds-ring {
+            display: inline-block;
+            position: relative;
+            width: 64px;
+            height: 64px;
+        }
+
+        .lds-ring div {
+            box-sizing: border-box;
+            display: block;
+            position: absolute;
+            width: 51px;
+            height: 51px;
+            margin: 6px;
+            border: 6px solid #fdd;
+            border-radius: 50%;
+            animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            border-color: #fdd transparent transparent transparent;
+        }
+
+        .lds-ring div:nth-child(1) {
+            animation-delay: -0.45s;
+        }
+
+        .lds-ring div:nth-child(2) {
+            animation-delay: -0.3s;
+        }
+
+        .lds-ring div:nth-child(3) {
+            animation-delay: -0.15s;
+        }
+
+        @keyframes lds-ring {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .lds-ripple {
+            display: inline-block;
+            position: relative;
+            width: 64px;
+            height: 64px;
+        }
+
+        .lds-ripple div {
+            position: absolute;
+            border: 4px solid #fdd;
+            opacity: 1;
+            border-radius: 50%;
+            animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+        }
+
+        .lds-ripple div:nth-child(2) {
+            animation-delay: -0.5s;
+        }
+
+        @keyframes lds-ripple {
+            0% {
+                top: 28px;
+                left: 28px;
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+
+            100% {
+                top: -1px;
+                left: -1px;
+                width: 58px;
+                height: 58px;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="navbar">
+        <div class="square black animated shake infinite slow"></div>
+        <div class="square brown animated fadeOut infinite slow"></div>
+        <div class="square purple animated flipOutX infinite slow"></div>
+        <div class="square red animated jackInTheBox infinite slow"></div>
+        <div class="square green animated zoomOutRight infinite slow"></div>
+        <div class="square blue animated rollOut infinite slow"></div>
+        <div class="square yellow animated rotateInDownLeft infinite slow"></div>
+        <div class="square orange animated heartBeat infinite slow"></div>
+
+    </div>
+
+    <div class="screen black">
+
+        <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+
+
+
+        <span class="text animated shake infinite slow">
+            papa es el más pasadito de toda la tierra
+        </span>
+
+    </div>
+
+    <div class="screen brown">
+
+        <div class="lds-grid">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <span class="text animated fadeOut infinite slow">
+
+            papa es el mas pesado de todo el universo
+        </span>
+
+    </div>
+
+    <div class="screen purple">
+
+        <div class="lds-hourglass"></div>
+
+        <span class="text animated flipOutX infinite slow">Teo es el más pesadito de toda la Galaxia</span>
+
+    </div>
+
+    <div class="screen red">
+
+
+
+        <div class="spinner lds-heart">
+            <div></div>
+        </div>
+
+        <span class="text animated jackInTheBox infinite slow">Mama es la más guapa de toda la Galaxia</span>
+
+    </div>
+
+    <div class="screen green">
+
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <span class="text animated zoomOutRight infinite slow">Teo vamos!</span>
+
+    </div>
+
+    <div class="screen blue">
+        <div class="lds-facebook">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <span class="text animated rollOut infinite slow">GUAPITO</span>
+
+    </div>
+
+    <div class="screen yellow">
+
+        <div class="lds-ripple">
+            <div></div>
+            <div></div>
+        </div>
+
+
+
+        <span class="text animated rotateInDownLeft infinite slow">Pesadito</span>
+
+    </div>
+
+    <div class="screen orange">
+
+        <div class="lds-circle">
+            <div></div>
+        </div>
+
+        <span class="text animated heartBeat infinite slow">Pizzaaaaaaaaa</span>
+
+    </div>
+
+
+    <script>
+        let squares = document.getElementsByClassName('square')
+        let screens = document.getElementsByClassName('screen')
+        let numSquares = squares.length
+
+        // console.log(squares)
+
+
+        for (let i = 0; i < numSquares; i++) {
+
+            squares[i].addEventListener('click', function (event) {
+
+                let idx = Array.from(squares).indexOf(event.target)
+                console.log(event.target, idx)
+
+                let element = screens[idx]
+
+                console.log(element)
+
+                screens[idx].scrollTo(0, 0)
+                //  window.scrollTo(0, screens[idx].offsetTop)
+
+
+                window.scrollTo({
+                    top: screens[idx].offsetTop,
+                    left: 0,
+                    behavior: 'smooth'
+                })
+
+            });
+        }
+    </script>
+
+
+</body>
+
+
+</html>
