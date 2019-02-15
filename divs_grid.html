@@ -1,0 +1,313 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Teo squares</title>
+
+
+    <style>
+        body {
+            margin: 0px;
+            width: 800vw;
+            background: black;
+        }
+
+        .screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 100vw;
+            height: 100vh;
+
+            /* width: 50vw;
+            height: 50vh; */
+        }
+
+        .brown {
+            background: #795548;
+        }
+
+        .purple {
+            background: purple;
+        }
+
+        .red {
+            background: red;
+        }
+
+        .green {
+            background: green;
+        }
+
+        .blue {
+            background: blue;
+        }
+
+        .yellow {
+            background: yellow;
+        }
+
+        .orange {
+            background: orange;
+        }
+
+        .navbar {
+            /* display: flex; */
+            position: fixed;
+            background: black;
+            bottom: 0px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .square {
+            width: 20px;
+            height: 20px;
+        }
+
+
+        .square:hover {
+            opacity: 0.6;
+        }
+
+        .text {
+
+
+            text-align: center;
+            vertical-align: middle;
+            font-size: 30px;
+        }
+
+        .row {
+            display: flex;
+        }
+
+        div {
+            display: inline;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="navbar">
+
+        <div class="row">
+
+            <div class="square brown"></div>
+            <div class="square purple"></div>
+
+        </div>
+        <div class="row">
+            <div class="square red"></div>
+            <div class="square green"></div>
+            <div class="square blue"></div>
+            <div class="square yellow"></div>
+        </div>
+        <div class="row">
+            <div class="square orange"></div>
+
+        </div>
+    </div>
+
+    <div class="row">
+
+
+        <div class="screen brown">
+
+            <span class="text">Teo come!</span>
+
+        </div>
+
+        <div class="screen purple">
+
+            <span class="text">Isaac es el más pesadito de toda la Galaxia</span>
+
+        </div>
+    </div>
+
+    <div class="row">
+
+
+
+        <div class="screen red">
+
+            <span class="text">Mama es la más guapa de toda la Galaxia</span>
+
+        </div>
+
+        <div class="screen green">
+
+            <span class="text">Teo vamos!</span>
+
+        </div>
+
+        <div class="screen blue">
+            <span class="text">GUAPITO</span>
+
+        </div>
+
+        <div class="screen yellow">
+
+            <span class="text">Pesadito</span>
+
+        </div>
+    </div>
+
+    </div>
+
+    <div class="row"></div>
+
+    <div class="screen orange">
+
+        <span class="text">Pizzaaaaaaaaa</span>
+
+    </div>
+
+    </div>
+
+    <script>
+        let squares = document.getElementsByClassName('square')
+        let screens = document.getElementsByClassName('screen')
+        let numSquares = squares.length
+
+        // Setup isScrolling variable
+        var isScrolling;
+        var verticalScrolling;
+        var lastIdx;
+        var step = 1
+
+
+
+        function scrollLeft() {
+
+            console.log('scrolling left')
+
+            step = 1
+
+            console.log(lastIdx)
+            console.log('window.scrollX', window.scrollX)
+            console.log(screens[lastIdx].offsetLeft)
+
+            if (window.scrollX === screens[lastIdx].offsetLeft) {
+                scrollTop()
+            } else {
+
+                window.scrollTo({
+                    top: window.scrollY,
+                    left: screens[lastIdx].offsetLeft,
+                    behavior: 'smooth'
+                })
+
+            }
+
+
+            console.log('scrolling left end')
+
+
+        }
+
+        function scrollTop() {
+
+            console.log('scrolling top')
+
+            step = 2
+
+            window.scrollTo({
+                top: screens[lastIdx].offsetTop,
+                left: window.scrollX,
+                behavior: 'smooth'
+            })
+
+            console.log('scrolling top end')
+
+        }
+
+        function stop() {
+            return false;
+        }
+        document.onmousewheel = stop;
+
+        window.addEventListener("keydown", function (e) {
+            // space and arrow keys
+            if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+                e.preventDefault();
+            }
+        }, false);
+
+
+
+
+
+
+        // Listen for scroll events
+
+        window.addEventListener('scroll', function (event) {
+
+            console.log(event)
+
+            // Clear our timeout throughout the scroll
+            window.clearTimeout(isScrolling);
+
+            // Set a timeout to run after scrolling ends
+            isScrolling = setTimeout(function () {
+
+                // Run the callback
+                console.log('Scrolling has stopped.');
+
+                if (step !== 2)
+
+                    scrollTop()
+
+            }, 66);
+
+        }, false);
+
+
+        for (let i = 0; i < numSquares; i++) {
+
+            squares[i].addEventListener('click', function (event) {
+
+                let idx = Array.from(squares).indexOf(event.target)
+                console.log(event.target, idx)
+
+                let element = screens[idx]
+
+                console.log(element)
+
+                //screens[idx].scrollTo(0, 0)
+                //  window.scrollTo(0, screens[idx].offsetTop)
+
+                lastIdx = idx
+
+                scrollLeft()
+                //scrollTop()
+
+                // window.scrollTo({
+                //     top: screens[idx].offsetTop,
+                //     left: window.scrollX,
+                //     behavior: 'smooth'
+                // })
+                // verticalScrolling = true
+                // lastIdx = idx
+
+                // window.scrollTo({
+                //     top: window.scrollY,
+                //     left: screens[idx].offsetLeft,
+                //     behavior: 'smooth'
+                // })
+
+            });
+        }
+    </script>
+
+
+</body>
+
+
+</html>
